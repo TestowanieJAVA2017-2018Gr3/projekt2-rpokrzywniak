@@ -8,19 +8,18 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doReturn;
+import org.easymock.EasyMockRunner;
+import org.easymock.Mock;
+import org.easymock.MockType;
+import static org.easymock.EasyMock.*;
+import org.easymock.TestSubject;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("deprecation")
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(EasyMockRunner.class)
   public class TestMp3PlayerEasyMock {
 
-	@Mock
+	@Mock(type = MockType.NICE)
 	MockMp3Player mp3;
 	
     private ArrayList<String> list = new ArrayList<String>();
@@ -36,32 +35,37 @@ import java.util.ArrayList;
 
     @Test
     public void testList() {
-      doReturn(list).when(mp3).getList();
+      expect(mp3.getList()).andReturn(list);
+      replay(mp3);
       assertThat(mp3.getList()).isEqualTo(list);
     }
     
     @Test
     public void testListSize() {
-      doReturn(list).when(mp3).getList();
+      expect(mp3.getList()).andReturn(list);
+      replay(mp3);
       assertThat(mp3.getList()).hasSize(4);
     }
     
     @Test
     public void testStop() {
-      doReturn(false).when(mp3).isPlaying();
+        expect(mp3.isPlaying()).andReturn(false);
+        replay(mp3);
       assertThat(mp3.isPlaying()).isFalse();
     }
     
     @Test
     public void testPlays() {
-      doReturn(true).when(mp3).isPlaying();
+        expect(mp3.isPlaying()).andReturn(true);
+        replay(mp3);
       assertThat(mp3.isPlaying()).isTrue();
     }
     
     @Test
     public void testTime(){
     	double time =  21;
-    	doReturn(time).when(mp3).currentPosition();
+    	expect(mp3.currentPosition()).andReturn(time);
+    	replay(mp3);
     	assertThat(mp3.currentPosition()).isEqualTo(time);
     }
 
