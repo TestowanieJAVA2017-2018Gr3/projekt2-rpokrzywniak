@@ -71,6 +71,19 @@ import java.util.ArrayList;
     	assertEquals(mp3.currentSong(),list.get(3));
     
     }
+    @Test
+    public void testStop() {
+        mp3.loadSongs(list);
+        mp3.play();
+        mp3.stop();
+        assertFalse(mp3.isPlaying());	       
+    }
+    @Test
+    public void testNotNull() {
+        mp3.loadSongs(list);
+        mp3.play();
+        assertNotNull(mp3.currentSong());	       
+    }
     
     @After
     public void teardown(){
