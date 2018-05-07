@@ -30,7 +30,7 @@ import java.util.ArrayList;
       mp3.loadSongs(list);
       	assertEquals(mp3.getList(),list);
       mp3.play();
-       assertEquals(mp3.currentSong(),list.get(0));
+       assertTrue(mp3.isPlaying());
       mp3.pause();
       	assertFalse(mp3.isPlaying());
       mp3.stop();
